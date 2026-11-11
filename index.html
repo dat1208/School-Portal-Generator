@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trình Tạo Screenshot Cổng Giảng Viên (School Faculty Portal Generator)</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Alex+Brush&family=Herr+Von+Muellerhoff&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- App Main Header -->
+  <header class="app-header">
+    <div class="brand-wrapper">
+      <div class="brand-badge">PORTAL GEN</div>
+      <div>
+        <div class="app-title">School Faculty Portal Screenshot Generator</div>
+        <div class="app-subtitle">Tạo ảnh chụp màn hình hồ sơ giảng viên chuẩn Stride K12 & trường học</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-secondary" id="btn-reset">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+        Mặc định Stride K12
+      </button>
+      <button class="btn btn-secondary" id="btn-open-doc-studio" style="background: linear-gradient(135deg, #1e40af, #2563eb); color: white;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        Tạo Tài Liệu (Studio)
+      </button>
+      <button class="btn btn-secondary" id="btn-copy-image">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        Copy Ảnh
+      </button>
+      <button class="btn btn-secondary" id="btn-download-pdf" style="background-color: #334155; color: #f1f5f9;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><text x="6" y="18" font-size="7" font-weight="bold" fill="currentColor">PDF</text></svg>
+        Xuất PDF (Portal)
+      </button>
+      <button class="btn btn-primary" id="btn-download-png">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        Tải Ảnh PNG (2K)
+      </button>
+      <button class="btn btn-success" id="btn-download-zip" style="background: linear-gradient(135deg, #059669, #10b981); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+        📦 Xuất Trọn Bộ (ZIP)
+      </button>
+    </div>
+  </header>
+
+  <!-- App Layout -->
+  <div class="app-container">
+    
+    <!-- Left Sidebar: Controls & Inputs -->
+    <aside class="editor-sidebar">
+      
+      <!-- Preset Selection -->
+      <div class="section-card">
+        <div class="section-header">
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f26522" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            Mẫu Trường Học Sẵn Có
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Quốc gia & Hệ thống trường học:</label>
+          <select id="inp-country-region">
+            <option value="us" selected>🇺🇸 Hoa Kỳ & Quốc Tế (US & Global K-12)</option>
+            <option value="vn">🇻🇳 Việt Nam (Đại Học & Trường Học Việt Nam)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Đối tượng xác minh:</label>
+          <select id="inp-user-role">
+            <option value="faculty" selected>👨‍🏫 Giảng viên / Nhân sự (Faculty / Staff)</option>
+            <option value="student">🎓 Học sinh / Sinh viên (Student)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Chọn Preset mẫu:</label>
+          <select id="inp-preset">
+            <optgroup label="Top Học Khu & Trường K-12 Auto Duyệt (SheerID)">
+              <option value="fcps">Fairfax County Public Schools (FCPS), VA - Top #1</option>
+              <option value="lausd">Los Angeles Unified School District (LAUSD), CA - Top #2</option>
+              <option value="ccsd">Clark County School District (CCSD - Las Vegas), NV</option>
+              <option value="mdcps">Miami-Dade County Public Schools (M-DCPS), FL</option>
+              <option value="hisd">Houston Independent School District (HISD), TX</option>
+              <option value="stride" selected>Stride K12 Online - National Accredited (Gốc)</option>
+              <option value="connections">Connections Academy (Pearson Online K-12)</option>
+              <option value="demille">Cecil B. DeMille My Viet Language Academy, CA</option>
+              <option value="stanford">Stanford Online High School - Dr. Sarah Jenkins</option>
+              <option value="mit">MIT Open Learning - Prof. Michael Chang</option>
+            </optgroup>
+            <optgroup label="🇻🇳 Các Trường Đại Học & Trường Học Việt Nam">
+              <option value="hust">Đại học Bách Khoa Hà Nội (HUST) - Giảng viên</option>
+              <option value="hcmut">ĐH Bách Khoa - ĐHQG TP.HCM (HCMUT) - Giảng viên</option>
+              <option value="ueh">Đại học Kinh tế TP.HCM (UEH) - Giảng viên</option>
+              <option value="amsterdam">THPT Chuyên Hà Nội - Amsterdam - Giáo viên</option>
+              <option value="hust_student">Đại học Bách Khoa Hà Nội - Sinh viên</option>
+              <option value="lehongphong_student">THPT Chuyên Lê Hồng Phong TP.HCM - Học sinh</option>
+            </optgroup>
+            <optgroup label="Hồ Sơ Học Sinh / Sinh Viên Mỹ (Student)">
+              <option value="fcps_student">Fairfax County Public Schools (FCPS), VA - Student (TJHSST)</option>
+              <option value="demille_student">Cecil B. DeMille My Viet Academy - HS: Tran Minh Quan (Grade 8)</option>
+              <option value="stride_student">Stride K12 Online - Student: Lucas Anderson (Grade 11)</option>
+              <option value="stanford_student">Stanford Online High School - Student: Emily Zhang (Class of 2026)</option>
+            </optgroup>
+            <optgroup label="✨ Tùy Chỉnh Trường Học Mới">
+              <option value="custom_school">✨ Tự Nhập Tên Trường Học / Học Khu Bất Kỳ...</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="form-group" style="margin-top:10px; display:flex; gap:8px;">
+          <button type="button" class="btn btn-secondary" id="btn-random-profile" style="flex:1; font-size:11.5px; justify-content:center; padding:6px 8px;">
+            🎲 Random Hồ Sơ
+          </button>
+          <button type="button" class="btn btn-secondary" id="btn-save-profile" style="flex:1; font-size:11.5px; justify-content:center; padding:6px 8px;">
+            💾 Lưu Hồ Sơ
+          </button>
+        </div>
+        <div class="form-group" id="saved-profiles-wrapper" style="margin-top:8px; display:none;">
+          <label style="font-size:11px; color:#94a3b8;">Hồ sơ bạn đã lưu:</label>
+          <select id="sel-saved-profiles" style="font-size:12px;"></select>
+        </div>
+      </div>
+
+      <!-- Custom School Details Card -->
+      <div class="section-card" id="card-custom-school">
+        <div class="section-header">
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M3 21h18M3 7v14M21 7v14M6 11h12M6 15h12M12 3l9 4H3l9-4z"/></svg>
+            Tùy Chỉnh Trường Học / Học Khu Bất Kỳ
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Tên Trường Học / Học Khu Đầy Đủ (Full Name):</label>
+          <input type="text" id="inp-cs-fullname" placeholder="vd: Orange County Public Schools (OCPS)">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tên viết tắt (Brand):</label>
+            <input type="text" id="inp-cs-brand" placeholder="vd: OCPS">
+          </div>
+          <div class="form-group">
+            <label>Hậu tố (Tag):</label>
+            <input type="text" id="inp-cs-tag" placeholder="vd: Public Schools">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Domain Website Trường:</label>
+            <input type="text" id="inp-cs-domain" placeholder="vd: ocps.net">
+          </div>
+          <div class="form-group">
+            <label>Mã NCES ID (US):</label>
+            <input type="text" id="inp-cs-nces" placeholder="vd: 1201440">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Mã Thuế EIN (9 số):</label>
+            <input type="text" id="inp-cs-ein" placeholder="vd: 59-6000780">
+          </div>
+          <div class="form-group">
+            <label>Hệ thống phần mềm (ERP):</label>
+            <select id="inp-cs-erp">
+              <option value="PowerSchool" selected>PowerSchool Unified SIS</option>
+              <option value="Tyler Munis">Tyler Munis ESS Portal</option>
+              <option value="Workday">Workday Education</option>
+              <option value="Frontline">Frontline Education ERP</option>
+              <option value="Infinite Campus">Infinite Campus Portal</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Địa chỉ trụ sở & Số điện thoại:</label>
+          <textarea id="inp-cs-address" rows="3" placeholder="445 W Amelia St&#10;Orlando, FL 32801&#10;(407) 317-3200"></textarea>
+        </div>
+        <button type="button" class="btn btn-primary" id="btn-apply-custom-school" style="width:100%; justify-content:center; font-size:12px; margin-top:4px;">
+          ⚡ Áp Dụng Thông Tin Trường Học Này
+        </button>
+      </div>
+
+      <!-- Browser & Header Settings -->
+      <div class="section-card">
+        <div class="section-header">
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            Thanh Trình Duyệt & Header
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Khung trình duyệt hiển thị:</label>
+          <select id="inp-browser-theme">
+            <option value="chrome" selected>Google Chrome (Tabbed Windows 11 - Siêu thực)</option>
+            <option value="safari">Apple Safari (macOS Traffic Lights)</option>
+            <option value="clean">Tối giản nguyên bản (Clean URL Bar)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>URL Trình duyệt:</label>
+          <input type="text" id="inp-browser-url">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Trạng thái bảo mật:</label>
+            <input type="text" id="inp-security-text">
+          </div>
+          <div class="form-group">
+            <label>Màu chủ đạo (Accent):</label>
+            <div class="color-input-wrapper">
+              <input type="color" id="inp-accent-color">
+              <span style="font-size: 12px; color: #94a3b8;">Đường viền & điểm nhấn</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tên Thương hiệu (Đen):</label>
+            <input type="text" id="inp-brand-main" placeholder="Stride">
+          </div>
+          <div class="form-group">
+            <label>Hậu tố Logo (Màu):</label>
+            <input type="text" id="inp-brand-tag" placeholder="K12">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Upload Logo Trường Học (PNG / SVG / JPG):</label>
+          <input type="file" id="inp-school-logo" accept="image/*" style="font-size: 11.5px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+            <button type="button" id="btn-remove-school-logo" style="display:none; font-size:11px; color:#ef4444; background:none; border:none; cursor:pointer;">✕ Xóa logo ảnh, dùng chữ mặc định</button>
+            <span style="font-size:11px; color:#94a3b8;">Hỗ trợ ảnh trong suốt</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Tiêu đề phụ góc phải Header:</label>
+          <input type="text" id="inp-portal-title" placeholder="Educator Portal 2025-2026">
+        </div>
+      </div>
+
+      <!-- Faculty Core Profile -->
+      <div class="section-card">
+        <div class="section-header">
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            Thông Tin Giảng Viên / Nhân Sự
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Họ và Tên đầy đủ:</label>
+          <input type="text" id="inp-faculty-name">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Chữ viết tắt Avatar (Initials):</label>
+            <input type="text" id="inp-faculty-initials" maxlength="4">
+          </div>
+          <div class="form-group">
+            <label>Hoặc Upload Ảnh thẻ:</label>
+            <input type="file" id="inp-avatar-photo" accept="image/*" style="font-size: 11px;">
+            <button type="button" id="btn-remove-photo" style="display:none; margin-top:4px; font-size:11px; color:#ef4444; background:none; border:none; cursor:pointer;">✕ Xóa ảnh, dùng chữ tắt</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Chức danh / Phòng ban (Subtitle màu cam):</label>
+          <input type="text" id="inp-faculty-subtitle">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nhãn Huy hiệu (Badge):</label>
+            <input type="text" id="inp-status-badge-text">
+          </div>
+          <div class="form-group">
+            <label>Màu huy hiệu:</label>
+            <select id="inp-status-badge-color">
+              <option value="green">Xanh lá (Active)</option>
+              <option value="blue">Xanh dương (Verified)</option>
+              <option value="orange">Cam (Pending / Special)</option>
+              <option value="purple">Tím (Tenured / Fellow)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Địa chỉ văn phòng làm việc:</label>
+          <textarea id="inp-office-address" rows="4"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Mã nhân viên / Corporate ID:</label>
+            <input type="text" id="inp-corp-id">
+          </div>
+          <div class="form-group">
+            <label>Email liên hệ:</label>
+            <input type="email" id="inp-email">
+          </div>
+        </div>
+      </div>
+
+      <!-- 2x2 Meta Attributes Grid -->
+      <div class="section-card">
+        <div class="section-header">
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+            Bảng Thông Tin 4 Thuộc Tính (Grid 2x2)
+          </span>
+        </div>
+        <!-- Row 1 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tiêu đề ô 1:</label>
+            <input type="text" id="inp-meta1-label">
+            <label style="margin-top:4px;">Giá trị ô 1:</label>
+            <input type="text" id="inp-meta1-val">
+          </div>
+          <div class="form-group">
+            <label>Tiêu đề ô 2:</label>
+            <input type="text" id="inp-meta2-label">
+            <label style="margin-top:4px;">Giá trị ô 2:</label>
+            <input type="text" id="inp-meta2-val">
+          </div>
+        </div>
+        <!-- Row 2 -->
+        <div class="form-row" style="margin-top:10px;">
+          <div class="form-group">
+            <label>Tiêu đề ô 3:</label>
+            <input type="text" id="inp-meta3-label">
+            <label style="margin-top:4px;">Giá trị ô 3:</label>
+            <input type="text" id="inp-meta3-val">
+          </div>
+          <div class="form-group">
+            <label>Tiêu đề ô 4:</label>
+            <input type="text" id="inp-meta4-label">
+            <label style="margin-top:4px;">Giá trị ô 4:</label>
+            <input type="text" id="inp-meta4-val">
+          </div>
+        </div>
+      </div>
+
+      <!-- Bio Paragraph -->
+      <div class="section-card">
+        <div class="section-header">
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            Đoạn Văn Giới Thiệu (Bio)
+          </span>
+        </div>
+        <div class="form-group">
+          <textarea id="inp-bio-text" rows="5"></textarea>
+        </div>
+      </div>
+
+      <!-- Faculty Documentation PDF List -->
+      <div class="section-card">
+        <div class="section-header">
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+            Hồ Sơ & Tài Liệu Đính Kèm (PDFs)
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Tiêu đề mục tài liệu:</label>
+          <input type="text" id="inp-doc-heading">
+        </div>
+        <div class="form-group">
+          <label>Danh sách tệp đính kèm:</label>
+          <div id="doc-editor-container"></div>
+          <button type="button" class="btn-add-doc" id="btn-add-doc">+ Thêm tài liệu PDF mới</button>
+        </div>
+      </div>
+
+      <!-- Footer Settings -->
+      <div class="section-card">
+        <div class="section-header">
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            Chân Trang (Footer)
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Trụ sở & Số điện thoại (Bên trái):</label>
+          <textarea id="inp-footer-address" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Bản quyền & Châm ngôn (Bên phải):</label>
+          <textarea id="inp-footer-copyright" rows="3"></textarea>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Right Area: Live Interactive Stage & Scaled Preview -->
+    <main class="preview-stage">
+      
+      <!-- Stage Tools -->
+      <div class="stage-toolbar">
+        <button class="btn-tool" id="btn-zoom-out" title="Thu nhỏ">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+        </button>
+        <span class="zoom-indicator" id="zoom-val">65%</span>
+        <button class="btn-tool" id="btn-zoom-in" title="Phóng to">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+        </button>
+        <button class="btn-tool" id="btn-zoom-fit" title="Vừa màn hình">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+        </button>
+      </div>
+
+      <!-- Preview Wrapper with CSS Scaling -->
+      <div class="preview-wrapper" id="preview-wrapper">
+        
+        <!-- TARGET DOM ELEMENT TO EXPORT AS SCREENSHOT -->
+        <div id="screenshot-target">
+          
+          <!-- 1. Browser Navigation Chrome (Realistic Tabbed & Clean options) -->
+          <div class="browser-chrome" id="pv-browser-chrome">
+            <!-- Chrome Tab Bar -->
+            <div class="chrome-tab-row">
+              <div class="chrome-tab">
+                <img id="chrome-custom-favicon" class="chrome-favicon" style="display:none;" alt="Favicon">
+                <svg id="chrome-default-favicon" class="chrome-favicon" viewBox="0 0 24 24" fill="var(--primary-color)"><circle cx="12" cy="12" r="10"/></svg>
+                <span class="chrome-tab-title" id="chrome-tab-title">Portal | Stride K12</span>
+                <span class="chrome-tab-close">×</span>
+              </div>
+              <div class="chrome-new-tab">+</div>
+              <div class="chrome-window-controls">
+                <span>─</span>
+                <span>□</span>
+                <span>✕</span>
+              </div>
+            </div>
+
+            <!-- Chrome Navigation & Address Bar -->
+            <div class="chrome-nav-bar">
+              <div class="chrome-nav-buttons">
+                <button type="button" class="chrome-btn-nav" title="Back">←</button>
+                <button type="button" class="chrome-btn-nav" title="Forward">→</button>
+                <button type="button" class="chrome-btn-nav" title="Reload">↻</button>
+              </div>
+              <div class="browser-url-bar">
+                <div class="browser-security">
+                  <svg class="secure-icon" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                  <span id="pv-security">Connection Secure</span>
+                </div>
+                <span class="browser-url-text" id="pv-url">https://www.stridelearning.com/k12/staff/benjamin-anderson</span>
+                <span class="chrome-star-icon">★</span>
+              </div>
+              <div class="chrome-profile-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#64748b"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Website Portal Header -->
+          <header class="portal-header">
+            <div class="portal-brand">
+              <img id="pv-brand-logo-img" class="portal-custom-logo-img" style="display:none;" alt="School Logo">
+              <span class="brand-main-text" id="pv-brand-main">Stride</span>
+              <span class="brand-tag-text" id="pv-brand-tag">K12</span>
+            </div>
+            <div class="portal-badge-text" id="pv-portal-title">Educator Portal 2025-2026</div>
+          </header>
+
+          <!-- 3. Accent Line -->
+          <div class="header-divider-line" id="pv-header-divider"></div>
+
+          <!-- 4. Portal Main Body -->
+          <div class="portal-body">
+            
+            <!-- Left Card: Faculty Info & Contact -->
+            <div class="profile-left-card">
+              <div class="avatar-container">
+                <div class="avatar-circle" id="pv-avatar-circle">BA</div>
+                <img class="avatar-image" id="pv-avatar-img" style="display:none;" alt="Avatar">
+              </div>
+
+              <h2 class="faculty-name-left" id="pv-name-left">Benjamin Anderson</h2>
+
+              <div class="status-badge-container">
+                <span class="status-badge" id="pv-status-badge">ACTIVE FACULTY</span>
+              </div>
+
+              <div class="address-block" id="pv-address">
+Tampa Office
+157 Broad Lane
+Floor 9
+Tampa, CA 10703
+              </div>
+
+              <div class="digital-contact-block">
+                <div class="digital-contact-title">Digital Contact:</div>
+                <div class="contact-meta-item">
+                  Corporate ID: <span id="pv-corp-id">K12-CA-2026</span>
+                </div>
+                <div class="contact-meta-item">
+                  Email: <span class="contact-email-link" id="pv-email">benjamin.anderson@k12.com</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Card: Details & Documents -->
+            <div class="profile-right-card">
+              
+              <h1 class="profile-right-title" id="pv-name-right">Benjamin Anderson</h1>
+              <div class="profile-right-subtitle" id="pv-subtitle">Academic Leadership & Compliance</div>
+
+              <!-- 2x2 Meta Attributes Grid -->
+              <div class="meta-grid">
+                <div>
+                  <div class="meta-field-label" id="pv-meta1-label">CURRENT TERM</div>
+                  <div class="meta-field-value" id="pv-meta1-val">2025 - 2026 Academic Year</div>
+                </div>
+                <div>
+                  <div class="meta-field-label" id="pv-meta2-label">ORGANIZATION</div>
+                  <div class="meta-field-value" id="pv-meta2-val">K12, Inc. / Stride, Inc.</div>
+                </div>
+                <div>
+                  <div class="meta-field-label" id="pv-meta3-label">LOCATION</div>
+                  <div class="meta-field-value" id="pv-meta3-val">Tampa, California (HQ)</div>
+                </div>
+                <div>
+                  <div class="meta-field-label" id="pv-meta4-label">STATUS</div>
+                  <div class="meta-field-value" id="pv-meta4-val">Full-Time Verified Faculty</div>
+                </div>
+              </div>
+
+              <!-- Bio Statement -->
+              <p class="profile-bio-text" id="pv-bio">
+                Welcome to the Stride K12 Educator Profile. Benjamin Anderson supports our instructional teams to provide high-quality, digital-first education to students across the nation. For the 2025-2026 academic year, our focus remains on expanding accessible learning programs and educator resources.
+              </p>
+
+              <!-- Faculty Documentation Section -->
+              <h3 class="documentation-heading" id="pv-doc-heading">Faculty Documentation:</h3>
+              <div class="doc-list" id="pv-doc-list">
+                <!-- Injected via JavaScript -->
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Enterprise Portal Verification & Audit Bar -->
+          <div class="enterprise-audit-bar">
+            <span>🔒 Enterprise Employee Self-Service (ESS) • PowerSchool Unified SIS • NCES ID Verified</span>
+            <span id="pv-audit-token">SEC-AUTH: 98E4-1B2F-2026 • SSL 256-Bit TLS</span>
+          </div>
+
+          <!-- 5. Portal Footer -->
+          <footer class="portal-footer">
+            <div class="footer-left-info" id="pv-footer-address">
+              Stride, Inc. (K12) Headquarters<br>
+              Tampa, CA 10703<br>
+              (222) 400-7838
+            </div>
+            <div class="footer-right-info" id="pv-footer-copyright">
+              © 2026 Stride Learning | K12 Inc.<br>
+              Excellence in Online Education
+            </div>
+          </footer>
+
+        </div>
+        <!-- END TARGET DOM ELEMENT -->
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Document Studio Modal -->
+  <div class="modal-overlay" id="doc-studio-modal">
+    <div class="modal-dialog">
+      
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="modal-title-area">
+          <span class="modal-badge">DOCUMENT STUDIO</span>
+          <div class="modal-title">Trình Tạo Hồ Sơ & Tài Liệu Trường Học Đính Kèm</div>
+        </div>
+
+        <!-- Document Type Tabs -->
+        <div class="modal-tabs">
+          <button class="modal-tab-btn active" data-tab="letter">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+            Thư Công Tác (A4)
+          </button>
+          <button class="modal-tab-btn" data-tab="paystub">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+            Phiếu Lương (Paystub)
+          </button>
+          <button class="modal-tab-btn" data-tab="idcard">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"></rect><circle cx="9" cy="10" r="2"></circle><line x1="15" y1="8" x2="17" y2="8"></line><line x1="15" y1="12" x2="17" y2="12"></line><line x1="7" y1="16" x2="17" y2="16"></line></svg>
+            Thẻ Giảng Viên (ID Card)
+          </button>
+          <button class="modal-tab-btn" data-tab="credential">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+            Chứng Chỉ (Certificate)
+          </button>
+        </div>
+
+        <button class="modal-close-btn" id="btn-close-modal" title="Đóng">✕</button>
+      </div>
+
+      <!-- Modal Content: 2 Columns -->
+      <div class="modal-content-grid">
+        
+        <!-- Left: Document Specific Controls -->
+        <aside class="modal-sidebar-editor">
+          
+          <!-- Actions -->
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <div class="form-group" style="margin-bottom:2px;">
+              <label style="color:#94a3b8; font-size:11.5px;">Tên tệp khi lưu (Khớp chuẩn hồ sơ):</label>
+              <input type="text" id="inp-doc-save-name" placeholder="Tên tệp xuất" style="font-size:12px; padding:6px 10px;">
+            </div>
+            <button class="btn btn-primary" id="btn-doc-download-pdf" style="width:100%; justify-content:center;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              Tải PDF Tài Liệu Này
+            </button>
+            <button class="btn btn-secondary" id="btn-doc-download-png" style="width:100%; justify-content:center;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+              Tải Ảnh PNG Tài Liệu
+            </button>
+            <div class="form-group" style="display:flex; align-items:center; gap:8px; margin-top:4px; padding:6px 10px; background:#1e293b; border-radius:6px;">
+              <input type="checkbox" id="chk-desk-mode" style="width:auto; cursor:pointer;">
+              <label for="chk-desk-mode" style="margin-bottom:0; cursor:pointer; color:#38bdf8; font-size:11.5px; font-weight:700;">📸 Chế độ Chụp Bàn Gỗ (Desk Photo)</label>
+            </div>
+          </div>
+
+          <!-- SheerID Quick Standards Checklist & Date Freshener -->
+          <div class="sheerid-compliance-box">
+            <div class="sheerid-box-title">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#10b981"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              Chuẩn Xét Duyệt SheerID Teacher
+            </div>
+            <ul class="sheerid-check-list">
+              <li>✓ Họ tên đầy đủ khớp 100% với form</li>
+              <li>✓ Tên trường/học khu và cơ quan liên kết</li>
+              <li>✓ Ngày phát hành thuộc năm học hiện tại</li>
+              <li>✓ Phiếu lương (Paystub) trong vòng 90 ngày</li>
+              <li>✓ Thẻ ID có ngày hết hạn còn hiệu lực</li>
+            </ul>
+            <button type="button" class="btn btn-secondary" id="btn-fresh-dates" style="width:100%; font-size:11px; justify-content:center; padding:5px 8px; margin-top:6px; background:#1e3a5f; color:#93c5fd; border:1px solid #3b82f6;">
+              🕒 Tự Động Cập Nhật Ngày Mới Nhất (30 Ngày)
+            </button>
+            <div class="sheerid-warning-note">
+              <strong>Lưu ý từ SheerID:</strong> Không nộp ảnh email, danh thiếp hay chứng chỉ độc lập vì SheerID từ chối tự động. Ưu tiên cao nhất: <strong>Paystub 90 ngày</strong>, <strong>Thẻ ID có hạn</strong>, <strong>Thư công tác</strong> hoặc <strong>Screenshot danh bạ kèm URL</strong>.
+            </div>
+          </div>
+
+          <hr style="border:0; border-top:1px solid #24344d; margin:6px 0;">
+
+          <!-- Controls for Tab 1: Letter -->
+          <div id="controls-tab-letter">
+            <div class="section-header"><span>Tùy chỉnh Thư Công Tác</span></div>
+            <div class="form-group">
+              <label>Ngày ký thư:</label>
+              <input type="text" id="inp-letter-date">
+            </div>
+            <div class="form-group">
+              <label>Mã số công văn (Ref No):</label>
+              <input type="text" id="inp-letter-ref">
+            </div>
+            <div class="form-group">
+              <label>Ngày bắt đầu làm việc (Hire Date):</label>
+              <input type="text" id="inp-letter-hire-date">
+            </div>
+            <div class="form-group">
+              <label>Mức lương / Thu nhập năm:</label>
+              <input type="text" id="inp-letter-salary">
+            </div>
+            <div class="form-group">
+              <label>Người ký xác nhận (HR Director):</label>
+              <input type="text" id="inp-letter-signer-name">
+            </div>
+            <div class="form-group">
+              <label>Chức vụ người ký:</label>
+              <input type="text" id="inp-letter-signer-title">
+            </div>
+
+            <!-- Signature & Realism Controls -->
+            <div style="margin-top:14px; padding-top:12px; border-top:1px dashed #334155;">
+              <label style="color:#38bdf8; font-weight:700;">Chữ ký & Con dấu thực tế:</label>
+              <div class="form-group">
+                <label>Màu mực chữ ký:</label>
+                <select id="inp-sig-ink-color">
+                  <option value="#183b6b" selected>Xanh bút máy hoàng gia (Fountain Blue)</option>
+                  <option value="#1d4ed8">Xanh bút bi tươi (Ballpoint Blue)</option>
+                  <option value="#0f172a">Đen bút gel (Black Gel Ink)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Màu con dấu đóng mộc (Rubber Stamp):</label>
+                <select id="inp-stamp-color">
+                  <option value="#b91c1c" selected>Đỏ mực dấu tròn (Red Rubber Ink)</option>
+                  <option value="#1e40af">Xanh dương học khu (District Blue)</option>
+                  <option value="#b45309">Vàng đồng dập nổi (Gold Notary)</option>
+                </select>
+              </div>
+              <div class="form-group" style="display:flex; align-items:center; gap:8px; margin-top:8px;">
+                <input type="checkbox" id="chk-scanner-mode" style="width:auto; cursor:pointer;">
+                <label for="chk-scanner-mode" style="margin-bottom:0; cursor:pointer; color:#f1f5f9; font-size:12px;">Hiệu ứng máy quét Scan (Góc nghiêng & Timestamp)</label>
+              </div>
+              <div class="form-group" style="margin-top:10px;">
+                <label>Tải ảnh chữ ký thật (PNG trong suốt):</label>
+                <input type="file" id="inp-sig-upload" accept="image/*" style="font-size:11px;">
+                <button type="button" id="btn-remove-custom-sig" style="display:none; font-size:11px; color:#ef4444; background:none; border:none; cursor:pointer; margin-top:4px;">✕ Dùng lại chữ ký bút máy mặc định</button>
+              </div>
+              <button type="button" class="btn btn-secondary" id="btn-open-pad" style="width:100%; font-size:12px; justify-content:center; padding:6px 10px;">
+                ✍️ Tự vẽ chữ ký tay (Canvas Pad)
+              </button>
+            </div>
+          </div>
+
+          <!-- Controls for Tab 2: ID Card -->
+          <div id="controls-tab-idcard" style="display:none;">
+            <div class="section-header"><span>Tùy chỉnh Thẻ Giảng Viên</span></div>
+            <div class="form-group">
+              <label>Hạn sử dụng thẻ (EXP):</label>
+              <input type="text" id="inp-idcard-exp">
+            </div>
+            <div class="form-group">
+              <label>Mã bảo mật thẻ:</label>
+              <input type="text" id="inp-idcard-sec-code">
+            </div>
+            <div class="form-group">
+              <label>Cấp độ thẻ / Nhãn:</label>
+              <input type="text" id="inp-idcard-badge-label">
+            </div>
+          </div>
+
+          <!-- Controls for Tab 3: Credential -->
+          <div id="controls-tab-credential" style="display:none;">
+            <div class="section-header"><span>Tùy chỉnh Chứng Chỉ</span></div>
+            <div class="form-group">
+              <label>Tên cơ quan cấp:</label>
+              <input type="text" id="inp-cred-issuer">
+            </div>
+            <div class="form-group">
+              <label>Loại chứng chỉ / Giấy phép:</label>
+              <input type="text" id="inp-cred-type">
+            </div>
+            <div class="form-group">
+              <label>Mã số chứng chỉ (Document #):</label>
+              <input type="text" id="inp-cred-doc-no">
+            </div>
+            <div class="form-group">
+              <label>Ngày hiệu lực:</label>
+              <input type="text" id="inp-cred-validity">
+            </div>
+          </div>
+
+          <!-- Controls for Tab 4: Paystub -->
+          <div id="controls-tab-paystub" style="display:none;">
+            <div class="section-header"><span>Tùy chỉnh Phiếu Lương (Paystub)</span></div>
+            <div class="form-group">
+              <label>Kỳ tính lương (Pay Period):</label>
+              <input type="text" id="inp-pay-period">
+            </div>
+            <div class="form-group">
+              <label>Ngày phát lương (Pay Date):</label>
+              <input type="text" id="inp-pay-date">
+            </div>
+            <div class="form-group">
+              <label>Số chi phiếu / Advice Number:</label>
+              <input type="text" id="inp-pay-advice-no">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Tổng thu nhập (Gross Pay):</label>
+                <input type="text" id="inp-pay-gross">
+              </div>
+              <div class="form-group">
+                <label>Thực nhận (Net Pay):</label>
+                <input type="text" id="inp-pay-net">
+              </div>
+            </div>
+          </div>
+
+        </aside>
+
+        <!-- Right: Document Live Preview Area -->
+        <main class="modal-preview-stage">
+          
+          <div class="doc-preview-wrapper" id="doc-wrapper">
+            
+            <!-- VIEW 1: Official Verification Letter -->
+            <div id="doc-target-letter">
+              
+              <!-- Metallic Staple Mark (Top-Left corner) -->
+              <div class="paper-staple" title="Staple Mark"></div>
+
+              <!-- Flatbed Scanner Header (Visible when scanner mode is active) -->
+              <div class="scanner-top-bar" id="scanner-meta-bar">
+                <span>[SCAN] 2026/11/11 09:14:22 AM EST</span>
+                <span>Canon imageRUNNER ADVANCE C5535i</span>
+                <span>DOC-ID: WSD-VER-94812</span>
+              </div>
+
+              <!-- Background Academic Seal Watermark -->
+              <svg class="letter-watermark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="90" fill="none" stroke="#000000" stroke-width="4"/>
+                <circle cx="100" cy="100" r="76" fill="none" stroke="#000000" stroke-width="2"/>
+                <polygon points="100,25 120,70 170,75 130,110 145,160 100,130 55,160 70,110 30,75 80,70" fill="#000000"/>
+              </svg>
+
+              <!-- Letterhead -->
+              <div class="letter-head">
+                <div class="letter-head-left">
+                  <img id="doc-lt-custom-logo" class="letter-custom-logo-img" style="display:none;" alt="School Logo">
+                  <svg id="doc-lt-default-logo" class="letter-crest-logo" viewBox="0 0 60 70" width="46" height="54">
+                    <path d="M30 2 L56 14 V38 C56 54 30 68 30 68 C30 68 4 54 4 38 V14 Z" fill="#0f1e36" />
+                    <path d="M30 6 L52 16 V36 C52 50 30 62 30 62 C30 62 8 50 8 36 V16 Z" fill="#ffffff" />
+                    <path d="M30 16 L34 24 H26 Z" fill="#f59e0b" />
+                    <path d="M28 24 H32 V40 H28 Z" fill="#0f1e36" />
+                    <path d="M18 42 Q30 38 42 42 V46 Q30 42 18 46 Z" fill="#0f1e36" />
+                    <circle cx="30" cy="14" r="3" fill="#ef4444" />
+                  </svg>
+                  <div>
+                    <div class="letter-school-name" id="doc-lt-school-name">CECIL B. DeMILLE MY VIET LANGUAGE ACADEMY</div>
+                    <div class="letter-school-sub" id="doc-lt-school-sub">Westminster School District • Dual Language Immersion Program</div>
+                  </div>
+                </div>
+                <div class="letter-contact-meta" id="doc-lt-contact-meta">
+                  15400 Bushard St, Midway City, CA 92655<br>
+                  Phone: (714) 894-7212 | Fax: (714) 894-7213<br>
+                  Web: https://demille.wsdk8.us/
+                </div>
+              </div>
+
+              <div class="letter-body">
+                <div class="letter-date-row">
+                  <span id="doc-lt-date">Date: November 11, 2026</span>
+                  <span id="doc-lt-ref">REF: WSD-EMP-2025-94812</span>
+                </div>
+
+                <div class="letter-recipient">
+                  <strong>TO WHOM IT MAY CONCERN:</strong><br>
+                  Academic Credentials & Employment Verification Services
+                </div>
+
+                <div class="letter-subject">
+                  SUBJECT: OFFICIAL FACULTY EMPLOYMENT VERIFICATION
+                </div>
+
+                <p class="letter-p">
+                  This official document serves to certify and confirm that <strong id="doc-lt-faculty-name">Benjamin Anderson</strong> is currently employed as an active faculty member with <strong id="doc-lt-org">Cecil B. DeMille My Viet Language Academy</strong>.
+                </p>
+
+                <table class="letter-table">
+                  <tr>
+                    <td>Employee Full Name:</td>
+                    <td id="doc-lt-tbl-name">Benjamin Anderson</td>
+                  </tr>
+                  <tr>
+                    <td>Corporate / Faculty ID:</td>
+                    <td id="doc-lt-tbl-id">WSD-MVLA-2026</td>
+                  </tr>
+                  <tr>
+                    <td>Official Position / Title:</td>
+                    <td id="doc-lt-tbl-title">Dual Language Immersion & Academic Leadership</td>
+                  </tr>
+                  <tr>
+                    <td>Employment Classification:</td>
+                    <td>Full-Time Regular Faculty (Exempt)</td>
+                  </tr>
+                  <tr>
+                    <td>Initial Date of Hire:</td>
+                    <td id="doc-lt-tbl-hire">August 15, 2022</td>
+                  </tr>
+                  <tr>
+                    <td>Primary Campus / Location:</td>
+                    <td id="doc-lt-tbl-loc">Midway City, California</td>
+                  </tr>
+                  <tr>
+                    <td>Annual Base Compensation:</td>
+                    <td id="doc-lt-tbl-salary">$84,500.00 USD / Academic Year</td>
+                  </tr>
+                  <tr>
+                    <td>Current Standing:</td>
+                    <td>Active / Good Standing with Full Faculty Privileges</td>
+                  </tr>
+                </table>
+
+                <p class="letter-p">
+                  The educator named above continues to meet all credentialing and instructional standards established by the institution and the California Commission on Teacher Credentialing. If further verification or documentation is required, please contact the Office of Human Resources directly.
+                </p>
+              </div>
+
+              <div class="letter-closing">
+                <div class="letter-sign-block">
+                  <div class="signature-container" id="letter-sig-container">
+                    <svg class="letter-signature-svg" id="letter-sig-svg" viewBox="0 0 240 75" xmlns="http://www.w3.org/2000/svg">
+                      <g fill="none" stroke="#183b6b" stroke-linecap="round" stroke-linejoin="round" transform="rotate(-3 120 37)">
+                        <!-- E loop flourish with natural pen start -->
+                        <path d="M 22 48 C 16 38, 14 22, 28 14 C 42 7, 48 18, 42 30 C 37 40, 26 44, 20 45 C 16 46, 25 43, 35 41 C 45 38, 52 46, 50 51 C 47 56, 38 56, 32 54" stroke-width="2.3"/>
+                        <!-- cursive l-e-a-n-o-r -->
+                        <path d="M 33 53 C 40 45, 48 20, 54 18 C 58 17, 56 28, 54 36 C 52 44, 58 45, 64 42 C 70 38, 71 45, 68 47 C 65 49, 74 38, 80 43 C 84 46, 78 50, 83 45 C 87 40, 94 40, 96 46 C 97 49, 103 41, 107 43 C 111 45, 109 50, 114 47" stroke-width="2.0"/>
+                        <!-- Capital V with dynamic high loop and descent -->
+                        <path d="M 124 16 C 118 18, 114 26, 116 32 C 118 38, 126 22, 132 15 C 137 9, 142 12, 138 24 C 132 38, 125 58, 122 64 C 120 67, 126 62, 134 46 C 140 34, 148 28, 154 28 C 158 28, 154 36, 150 44" stroke-width="2.5"/>
+                        <!-- a-n-c-e with tail -->
+                        <path d="M 150 44 C 156 38, 163 39, 162 45 C 161 49, 168 40, 174 43 C 178 45, 175 51, 182 46 C 187 43, 192 44, 195 48 C 197 50, 202 46, 208 45" stroke-width="1.9"/>
+                        <!-- Elegant sweeping underline flourish with pen tapering -->
+                        <path d="M 38 60 C 75 62, 120 66, 165 64 C 190 63, 218 58, 226 53 C 230 50, 222 56, 204 60 C 175 66, 128 68, 72 65 C 50 64, 42 63, 36 62" stroke-width="2.2"/>
+                        <!-- Subtle pen pressure dot -->
+                        <ellipse cx="23" cy="47" rx="1.5" ry="1.2" fill="#183b6b"/>
+                        <ellipse cx="123" cy="18" rx="1.8" ry="1.4" fill="#183b6b"/>
+                      </g>
+                    </svg>
+                    <img id="letter-sig-custom-img" class="custom-sig-image" style="display:none;" alt="Signature">
+                  </div>
+                  <div class="letter-signer-name" id="doc-lt-signer">Dr. Eleanor Vance, Ph.D.</div>
+                  <div class="letter-signer-title" id="doc-lt-signer-role">Director of Human Resources & Academic Compliance</div>
+                </div>
+
+                <!-- Realistic Physical Rubber Stamp -->
+                <div class="official-seal-container">
+                  <svg class="official-rubber-stamp" id="letter-stamp-svg" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <path id="stamp-top-path" d="M 24,70 A 46,46 0 1,1 116,70" fill="none" />
+                      <path id="stamp-bot-path" d="M 116,70 A 46,46 0 0,1 24,70" fill="none" />
+                    </defs>
+                    <g id="stamp-inner-group" stroke="#b91c1c" fill="#b91c1c">
+                      <!-- Outer double rings -->
+                      <circle cx="70" cy="70" r="62" fill="none" stroke-width="2.8" opacity="0.9"/>
+                      <circle cx="70" cy="70" r="53" fill="none" stroke-width="1.4" opacity="0.85"/>
+                      
+                      <!-- Curved text on path -->
+                      <text font-family="'Montserrat', Arial, sans-serif" font-size="8" font-weight="900" letter-spacing="1.2">
+                        <textPath href="#stamp-top-path" startOffset="50%" text-anchor="middle">
+                          ★ CERTIFIED FACULTY RECORD ★
+                        </textPath>
+                      </text>
+                      
+                      <text font-family="'Montserrat', Arial, sans-serif" font-size="7.5" font-weight="800" letter-spacing="0.9">
+                        <textPath href="#stamp-bot-path" startOffset="50%" text-anchor="middle">
+                          OFFICE OF HUMAN RESOURCES
+                        </textPath>
+                      </text>
+
+                      <!-- Center Box & Seal Info -->
+                      <rect x="32" y="58" width="76" height="24" fill="none" stroke-width="1.6" rx="2" opacity="0.9"/>
+                      <text x="70" y="68" font-family="'Montserrat', Arial, sans-serif" font-size="8.5" font-weight="900" text-anchor="middle" letter-spacing="0.8">OFFICIAL SEAL</text>
+                      <text x="70" y="77" font-family="'Montserrat', Arial, sans-serif" font-size="7" font-weight="800" text-anchor="middle" letter-spacing="0.5">VERIFIED & APPROVED</text>
+                    </g>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Official Footer with Tracking Barcode -->
+              <div class="letter-footer-note">
+                <div>
+                  <span style="font-family:'Libre Barcode 39', monospace, cursive; font-size:22px; letter-spacing:1px; color:#1e293b; display:block;">*WSD-EMP-2025-94812*</span>
+                  <span>Westminster School District • Department of Certificated Human Resources</span>
+                </div>
+                <div style="text-align:right;">
+                  <span style="display:block; font-weight:600; color:#475569;">SEC-HASH: 8F29-D4B1-026E</span>
+                  <span>Verify online: https://demille.wsdk8.us/verify</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- VIEW 2: Faculty ID Card (2 Sides) -->
+            <div id="doc-target-idcard">
+              <!-- Front Side -->
+              <div class="idcard-side idcard-front">
+                <div class="idcard-lanyard-slot"></div>
+                <div class="idcard-front-header" id="doc-ic-header">
+                  <span class="idcard-school-brand" id="doc-ic-brand">DeMille My Viet Language Academy</span>
+                  <span class="idcard-badge-type" id="doc-ic-badge-label">FACULTY / STAFF</span>
+                </div>
+                <div class="idcard-front-body">
+                  <div class="idcard-photo-box" id="doc-ic-photo-box">
+                    <span id="doc-ic-initials">BA</span>
+                    <img id="doc-ic-photo-img" class="idcard-photo-img" style="display:none;" alt="Photo">
+                  </div>
+                  <div class="idcard-info-box">
+                    <div class="idcard-chip"></div>
+                    <div class="idcard-faculty-name" id="doc-ic-name">Benjamin Anderson</div>
+                    <div class="idcard-faculty-role" id="doc-ic-role">Academic Leadership & Compliance</div>
+                    <div class="idcard-meta-line">ID: <strong id="doc-ic-id">WSD-MVLA-2026</strong></div>
+                    <div class="idcard-meta-line">DEPT: <strong>Instructional Leadership</strong></div>
+                  </div>
+                  <!-- Shimmering Hologram Security Seal -->
+                  <div class="idcard-hologram-seal" title="Security Hologram">SECURE</div>
+                </div>
+                <div class="idcard-front-footer">
+                  <div class="idcard-barcode">|||| | | |||| || | || |||| |</div>
+                  <div class="idcard-exp-date" id="doc-ic-exp">EXP: 06/2026</div>
+                </div>
+              </div>
+
+              <!-- Back Side -->
+              <div class="idcard-side idcard-back">
+                <div class="idcard-lanyard-slot"></div>
+                <div class="idcard-mag-stripe"></div>
+                <div class="idcard-back-content">
+                  <div class="idcard-back-text">
+                    <strong>FACULTY IDENTIFICATION CARD</strong><br>
+                    This card is the property of the issuing educational institution. It must be presented upon request and surrendered upon termination of faculty appointment.<br><br>
+                    Emergency Hotline: (714) 894-7212<br>
+                    Security Office: Campus Safety Desk
+                  </div>
+                  <div class="idcard-qr-box">
+                    <svg viewBox="0 0 100 100" class="idcard-qr-img">
+                      <rect x="0" y="0" width="100" height="100" fill="#ffffff"/>
+                      <rect x="10" y="10" width="25" height="25" fill="#000000"/>
+                      <rect x="15" y="15" width="15" height="15" fill="#ffffff"/>
+                      <rect x="18" y="18" width="9" height="9" fill="#000000"/>
+                      <rect x="65" y="10" width="25" height="25" fill="#000000"/>
+                      <rect x="70" y="15" width="15" height="15" fill="#ffffff"/>
+                      <rect x="73" y="18" width="9" height="9" fill="#000000"/>
+                      <rect x="10" y="65" width="25" height="25" fill="#000000"/>
+                      <rect x="15" y="70" width="15" height="15" fill="#ffffff"/>
+                      <rect x="18" y="73" width="9" height="9" fill="#000000"/>
+                      <rect x="45" y="15" width="10" height="10" fill="#000000"/>
+                      <rect x="45" y="35" width="10" height="10" fill="#000000"/>
+                      <rect x="65" y="45" width="10" height="10" fill="#000000"/>
+                      <rect x="45" y="65" width="10" height="10" fill="#000000"/>
+                      <rect x="65" y="65" width="20" height="10" fill="#000000"/>
+                      <rect x="45" y="80" width="10" height="10" fill="#000000"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="idcard-back-footer">
+                  <div class="idcard-sig-strip">
+                    <svg viewBox="0 0 140 28" class="idcard-cardholder-sig">
+                      <g fill="none" stroke="#1d4ed8" stroke-linecap="round" stroke-linejoin="round" transform="rotate(-2 70 14)">
+                        <!-- B loop -->
+                        <path d="M 8 22 C 10 13, 13 6, 17 5 C 21 4, 24 9, 23 14 C 22 17, 18 19, 15 19 C 20 19, 24 21, 23 24 C 21 26, 16 25, 12 24" stroke-width="1.8"/>
+                        <!-- anderson rapid flow -->
+                        <path d="M 28 23 C 33 17, 38 14, 42 17 C 44 19, 42 22, 47 19 C 51 16, 56 18, 58 21 C 60 23, 65 18, 68 19 C 72 20, 70 24, 74 21 C 77 19, 83 20, 86 23" stroke-width="1.5"/>
+                        <!-- underline flourish -->
+                        <path d="M 18 26 C 38 27, 65 28, 92 25" stroke-width="1.6"/>
+                      </g>
+                    </svg>
+                    <span class="idcard-sig-caption">Authorized Cardholder Signature</span>
+                  </div>
+                  <span id="doc-ic-sec" style="align-self:flex-end;">SEC-CODE: 4982-A</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- VIEW 3: Teaching Credential Certificate -->
+            <div id="doc-target-credential">
+              <div class="credential-border-outer">
+                <div class="credential-border-inner">
+                  <div>
+                    <div class="credential-state-title" id="doc-cr-issuer">STATE COMMISSION ON TEACHER CREDENTIALING</div>
+                    <div class="credential-dept-title">DEPARTMENT OF ACCREDITATION & PROFESSIONAL STANDARDS</div>
+                    <div class="credential-main-heading">CERTIFICATE OF TEACHING CREDENTIAL</div>
+                    <div class="credential-certify-line">This is to officially certify that</div>
+                  </div>
+
+                  <div class="credential-recipient-name" id="doc-cr-name">Benjamin Anderson</div>
+
+                  <div>
+                    <p class="credential-statement">
+                      Has fulfilled all educational requirements, background verifications, and professional standards prescribed by law and is hereby authorized to practice as a verified faculty educator within the state public and accredited private school systems.
+                    </p>
+                    <div class="credential-auth-type" id="doc-cr-type">
+                      Multiple Subject Teaching Credential • BCLAD Bilingual Authorization
+                    </div>
+                  </div>
+
+                  <div class="credential-bottom-signatures">
+                    <div class="cred-sign-col">
+                      <div class="cred-sig-wrapper">
+                        <svg viewBox="0 0 180 50" class="cred-sig-svg" xmlns="http://www.w3.org/2000/svg">
+                          <g fill="none" stroke="#162e51" stroke-linecap="round" stroke-linejoin="round" transform="rotate(-2 90 25)">
+                            <!-- M with confident strokes -->
+                            <path d="M 15 42 C 18 28, 22 15, 26 12 C 30 9, 32 16, 36 28 C 40 38, 44 14, 48 10 C 52 8, 55 18, 58 35 C 60 42, 64 36, 70 34" stroke-width="2.3"/>
+                            <!-- arcus -->
+                            <path d="M 70 34 C 74 30, 80 32, 78 37 C 76 41, 84 32, 88 35 C 92 37, 88 42, 94 36 C 98 32, 104 34, 106 39" stroke-width="1.8"/>
+                            <!-- S. flourish -->
+                            <path d="M 116 18 C 112 24, 114 30, 122 28 C 130 25, 128 14, 120 12 C 114 11, 108 20, 112 32 C 115 42, 126 44, 134 40 C 140 37, 146 39, 150 42" stroke-width="2.2"/>
+                            <!-- terling flick -->
+                            <path d="M 150 42 C 154 36, 160 38, 164 42 C 167 44, 172 40, 175 38" stroke-width="1.8"/>
+                            <!-- sharp underline -->
+                            <path d="M 28 46 C 65 48, 115 50, 168 45" stroke-width="2.0"/>
+                          </g>
+                        </svg>
+                      </div>
+                      <div class="cred-sign-line">Dr. Marcus Sterling</div>
+                      <div class="cred-sign-role">State Superintendent of Public Instruction</div>
+                    </div>
+
+                    <div class="cred-gold-seal">
+                      <span>★ GOLD SEAL ★</span>
+                      <span>CERTIFIED</span>
+                      <span>CREDENTIAL</span>
+                    </div>
+
+                    <div class="cred-sign-col">
+                      <div class="cred-sig-wrapper">
+                        <svg viewBox="0 0 180 50" class="cred-sig-svg" xmlns="http://www.w3.org/2000/svg">
+                          <g fill="none" stroke="#182c47" stroke-linecap="round" stroke-linejoin="round" transform="rotate(-3 90 25)">
+                            <!-- Elegant E loop -->
+                            <path d="M 20 28 C 15 18, 24 10, 32 12 C 38 14, 34 24, 25 26 C 35 25, 42 22, 45 28 C 47 34, 40 38, 30 36" stroke-width="2.1"/>
+                            <!-- lena -->
+                            <path d="M 32 36 C 38 28, 44 14, 48 12 C 52 11, 50 20, 48 26 C 46 32, 52 33, 56 30 C 60 27, 62 33, 60 35 C 58 37, 65 28, 70 31 C 74 33, 72 38, 76 34" stroke-width="1.7"/>
+                            <!-- R. Rostova flourish -->
+                            <path d="M 88 38 C 90 24, 94 12, 98 10 C 104 8, 110 14, 108 22 C 106 28, 98 30, 94 30 C 98 32, 106 36, 112 40 C 116 42, 122 32, 126 34 C 130 36, 128 40, 134 36 C 138 33, 145 34, 148 38 C 152 40, 158 35, 164 34" stroke-width="2.2"/>
+                            <!-- double accent loop -->
+                            <path d="M 45 42 C 80 46, 125 47, 168 41 C 172 40, 164 45, 150 47 C 120 50, 80 49, 52 46" stroke-width="1.9"/>
+                          </g>
+                        </svg>
+                      </div>
+                      <div class="cred-sign-line">Elena Rostova, Ed.D.</div>
+                      <div class="cred-sign-role">Chair, Board of Education</div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- VIEW 4: Faculty Paystub / Earnings Statement -->
+            <div id="doc-target-paystub">
+              
+              <!-- Paystub Header -->
+              <div class="paystub-header">
+                <div style="display:flex; align-items:center; gap:14px;">
+                  <img id="doc-ps-custom-logo" class="letter-custom-logo-img" style="display:none; max-height:48px;" alt="School Logo">
+                  <div>
+                    <div class="paystub-school-title" id="doc-ps-school-name">CECIL B. DeMILLE MY VIET LANGUAGE ACADEMY</div>
+                    <div class="paystub-sub" id="doc-ps-sub">Westminster School District • Payroll & Certificated Disbursements</div>
+                    <div class="paystub-sub" id="doc-ps-ein">15400 Bushard St, Midway City, CA 92655 • Federal EIN: 95-6002148</div>
+                  </div>
+                </div>
+                <div class="paystub-meta-box">
+                  <div><strong>EARNINGS STATEMENT</strong></div>
+                  <div>Period: <span id="doc-ps-period">10/01/2026 - 10/15/2026</span></div>
+                  <div>Pay Date: <span id="doc-ps-date">10/20/2026</span></div>
+                  <div>Advice #: <span id="doc-ps-advice">ADV-2026-89412</span></div>
+                </div>
+              </div>
+
+              <!-- Employee Data Table -->
+              <table class="paystub-emp-table">
+                <tr>
+                  <td style="width:50%;">Employee: <strong id="doc-ps-name">Benjamin Anderson</strong></td>
+                  <td style="width:50%;">Department: <strong id="doc-ps-dept">Dual Language Immersion Faculty</strong></td>
+                </tr>
+                <tr>
+                  <td>Faculty ID: <strong id="doc-ps-id">WSD-MVLA-2026</strong></td>
+                  <td>Pay Frequency: <strong>Semi-Monthly</strong></td>
+                </tr>
+                <tr>
+                  <td>SSN: <strong>***-**-4912</strong></td>
+                  <td>Tax Status: <strong>Single / 0 Allowances</strong></td>
+                </tr>
+              </table>
+
+              <!-- 3-Column Tables: Earnings, Taxes, Deductions -->
+              <table class="paystub-sections-table">
+                <tr>
+                  <!-- Col 1: Earnings -->
+                  <td style="width:33.3%; vertical-align:top; padding-right:8px;">
+                    <div class="paystub-col-box">
+                      <div class="paystub-col-title">EARNINGS</div>
+                      <table class="paystub-col-table">
+                        <tr><td>Regular Certificated</td><td>$3,520.83</td></tr>
+                        <tr><td>Dual Language Lead</td><td>$250.00</td></tr>
+                        <tr><td>Instructional Stipend</td><td>$180.00</td></tr>
+                        <tr class="paystub-col-total"><td>TOTAL GROSS:</td><td id="doc-ps-tbl-gross">$3,950.83</td></tr>
+                      </table>
+                    </div>
+                  </td>
+
+                  <!-- Col 2: Taxes -->
+                  <td style="width:33.3%; vertical-align:top; padding:0 4px;">
+                    <div class="paystub-col-box">
+                      <div class="paystub-col-title">STATUTORY TAXES</div>
+                      <table class="paystub-col-table">
+                        <tr><td>Federal W/H (FIT)</td><td>$445.20</td></tr>
+                        <tr><td>CA State W/H (SIT)</td><td>$178.60</td></tr>
+                        <tr><td>Medicare (1.45%)</td><td>$57.29</td></tr>
+                        <tr class="paystub-col-total"><td>TOTAL TAXES:</td><td>$681.09</td></tr>
+                      </table>
+                    </div>
+                  </td>
+
+                  <!-- Col 3: Deductions -->
+                  <td style="width:33.3%; vertical-align:top; padding-left:8px;">
+                    <div class="paystub-col-box">
+                      <div class="paystub-col-title">DEDUCTIONS / CALSTRS</div>
+                      <table class="paystub-col-table">
+                        <tr><td>CalSTRS Pension (10.25%)</td><td>$404.96</td></tr>
+                        <tr><td>District Health & Dental</td><td>$115.00</td></tr>
+                        <tr><td>CTA/NEA Faculty Dues</td><td>$42.50</td></tr>
+                        <tr class="paystub-col-total"><td>DEDUCTIONS:</td><td>$562.46</td></tr>
+                      </table>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Summary Banner -->
+              <div class="paystub-summary-banner">
+                <div class="paystub-sum-col">
+                  <div class="paystub-sum-label">TOTAL GROSS PAY</div>
+                  <div class="paystub-sum-val" id="doc-ps-sum-gross">$3,950.83</div>
+                </div>
+                <div class="paystub-sum-col">
+                  <div class="paystub-sum-label">TOTAL TAXES</div>
+                  <div class="paystub-sum-val">$681.09</div>
+                </div>
+                <div class="paystub-sum-col">
+                  <div class="paystub-sum-label">TOTAL DEDUCTIONS</div>
+                  <div class="paystub-sum-val">$562.46</div>
+                </div>
+                <div class="paystub-sum-col">
+                  <div class="paystub-sum-label" style="color:#86efac;">NET DIRECT DEPOSIT</div>
+                  <div class="paystub-sum-val net" id="doc-ps-sum-net">$2,707.28</div>
+                </div>
+              </div>
+
+              <!-- Direct Deposit Slip -->
+              <div class="paystub-deposit-box">
+                <div class="paystub-deposit-title">
+                  <span>DIRECT DEPOSIT ADVICE - NON-NEGOTIABLE</span>
+                  <span id="doc-ps-slip-net">AMOUNT: $2,707.28</span>
+                </div>
+                <div>Institution: Bank of America, N.A. • Routing: *******041 • Account: *******5892 (Checking)</div>
+                <div style="font-size:10px; color:#94a3b8; margin-top:4px;">Funds electronically transferred into account on record. Keep this stub for your personal financial and tax records.</div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </main>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Signature Pad Drawing Modal -->
+  <div class="modal-overlay" id="sig-pad-modal" style="z-index: 10000;">
+    <div style="background:#111a2e; border:1px solid #334155; border-radius:14px; padding:20px; width:440px; max-width:95vw; box-shadow:0 20px 50px rgba(0,0,0,0.8);">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <span style="font-size:14px; font-weight:700; color:#fff;">✍️ Vẽ Chữ Ký Tay Thật</span>
+        <button id="btn-close-sig-pad" style="background:none; border:none; color:#94a3b8; font-size:18px; cursor:pointer;">✕</button>
+      </div>
+      <p style="font-size:12px; color:#94a3b8; margin-bottom:10px;">Dùng chuột hoặc màn hình cảm ứng để ký trực tiếp vào ô bên dưới:</p>
+      
+      <div style="background:#ffffff; border:2px dashed #94a3b8; border-radius:8px; overflow:hidden; position:relative; margin-bottom:12px;">
+        <canvas id="sig-canvas" width="400" height="150" style="width:100%; height:150px; display:block; cursor:crosshair;"></canvas>
+        <span style="position:absolute; bottom:6px; right:10px; font-size:10px; color:#cbd5e1; pointer-events:none;">Ký tên tại đây</span>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; gap:10px;">
+        <button type="button" class="btn btn-secondary" id="btn-clear-sig-pad" style="font-size:12px;">Xóa ký lại</button>
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="btn btn-secondary" id="btn-cancel-sig-pad" style="font-size:12px;">Hủy</button>
+          <button type="button" class="btn btn-primary" id="btn-apply-sig-pad" style="font-size:12px;">Áp dụng chữ ký</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fullscreen ZIP Generation Loading Overlay -->
+  <div class="zip-loading-overlay" id="zip-overlay">
+    <div class="zip-spinner"></div>
+    <div style="font-size:18px; font-weight:800; margin-bottom:8px;">Đang kết xuất & đóng gói trọn bộ hồ sơ...</div>
+    <div style="font-size:13.5px; color:#94a3b8;" id="zip-progress-text">Đang chuẩn bị...</div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-notice" id="toast">Thông báo</div>
+
+  <!-- Scripts -->
+  <script src="assets/html2canvas.min.js"></script>
+  <script src="assets/jspdf.umd.min.js"></script>
+  <script src="assets/jszip.min.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
