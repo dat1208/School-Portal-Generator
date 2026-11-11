@@ -1,42 +1,83 @@
 # School Faculty & Student Portal Screenshot Generator
 
-Trình tạo ảnh chụp màn hình cổng thông tin trường học, học sinh, giảng viên và bộ tài liệu xác thực chuẩn quốc tế (US & Vietnam).
+A comprehensive web-based tool for generating photorealistic school portals, student dossiers, faculty profiles, and accompanying official academic verification documentation (US & Vietnam standards).
 
-## Tính Năng Nổi Bật
+---
 
-- **Mô phỏng trình duyệt siêu thực**:
-  - Tùy chọn giao diện **Google Chrome (Windows 11 Tabbed)**, **Apple Safari (macOS)** hoặc **Clean Minimal**.
-  - Thanh địa chỉ URL bảo mật, tab đang mở có favicon trường học, nút điều hướng Back/Forward/Reload.
-- **Hỗ trợ Đa Quốc Gia & Hệ Thống Giáo Dục**:
-  - 🇺🇸 **Hoa Kỳ & Quốc tế**: Fairfax County (FCPS), Los Angeles Unified (LAUSD), Clark County (CCSD), Miami-Dade (M-DCPS), Houston (HISD), Stride K12, Connections Academy, Stanford OHS, MIT Open Learning...
-  - 🇻🇳 **Việt Nam**: ĐH Bách Khoa Hà Nội (HUST), ĐH Bách Khoa - ĐHQG TP.HCM (HCMUT), ĐH Kinh tế TP.HCM (UEH), THPT Chuyên Hà Nội - Amsterdam, THPT Chuyên Lê Hồng Phong TP.HCM...
-  - ✨ **Tự nhập trường bất kỳ**: Tự do nhập tên trường, domain, mã số thuế Federal EIN, mã NCES ID của bất kỳ cơ sở giáo dục nào trên thế giới.
-- **Hỗ trợ 2 Đối tượng**:
-  - 👨‍🏫 **Giảng viên / Nhân sự (Faculty & Staff)**
-  - 🎓 **Học sinh / Sinh viên (Student & Scholar)**
-- **Bộ Studio Tạo Tài Liệu Đính Kèm (Document Studio)**:
-  - 📄 **Thư Xác Nhận Công Tác / Nhập Học (A4)**: Letterhead chính thức, con dấu mộc tròn đỏ/xanh thực tế (`mix-blend-mode: multiply`), chữ ký mực bút máy thật, mã vạch lưu trữ Code128.
-  - 💵 **Phiếu Báo Lương Giảng Viên (Paystub / Earnings Statement)**: Chi tiết thu nhập, thuế, quỹ hưu trí CalSTRS, ủy nhiệm chi trực tiếp ngân hàng (Direct Deposit Slip).
-  - 🪪 **Thẻ Nhân Sự / Thẻ Học Sinh 2 Mặt (ID Card)**: Chip EMV, tem ảnh ảo Hologram, mã vạch, dải từ và dải chữ ký chủ thẻ mặt sau.
-  - 📜 **Chứng Chỉ / Giấy Phép Giảng Dạy (Teaching Credential Certificate)**.
-- **Công cụ Xuất Dữ Liệu**:
-  - 📸 **Tải Ảnh PNG (2K Crisp)**
-  - 📄 **Xuất PDF Cổng Trường & Tài Liệu (< 1MB)**: Chuẩn khổ A4 siêu nhẹ, sắc nét.
-  - 📦 **Xuất Trọn Bộ 1 File ZIP**: Đóng gói đồng thời toàn bộ 5 tài liệu vào 1 file ZIP duy nhất.
-  - ✍️ **Ký tay trực tiếp (Canvas Pad)** hoặc tải ảnh chữ ký thật.
-  - 📸 **Chế độ Chụp Bàn Gỗ (Desk Photo Mode)** & **Hiệu ứng máy quét Scan thực tế**.
+## Key Features
 
-## Hướng Dẫn Khởi Chạy
+### 1. Photorealistic Browser Window Simulation
+- Multiple browser chrome styles:
+  - **Google Chrome (Windows 11 Tabbed)**: Authentic tab bar with school favicon, active tab title, tab controls, full navigation bar (`←`, `→`, `↻`), security padlock indicator, and omnibox address bar.
+  - **Apple Safari (macOS)**: Centered minimalist URL bar with authentic window traffic light controls.
+  - **Clean Minimal**: Distraction-free direct address bar interface.
 
-### Cách 1: Chạy trực tiếp (Không cần cài đặt)
-Nhấp đúp chuột vào file `start.bat` hoặc mở trực tiếp `index.html` trong bất kỳ trình duyệt nào.
+### 2. Dual Verification Roles
+- 👨‍🏫 **Faculty & Staff**: Educator profiles, academic departments, tenure track, corporate ID, and instructional leadership credentials.
+- 🎓 **Student & Scholar**: Student dossiers, grade levels, honors / AP tracks, student ID, and enrollment verification records.
 
-### Cách 2: Khởi chạy qua Node.js
+### 3. Integrated Document Studio
+Generates matching official educational paperwork corresponding to the portal records:
+- 📄 **Official Employment / Enrollment Letter (A4)**: Formal school letterhead, administrative crest, authentic circular rubber stamp (`mix-blend-mode: multiply`), natural cursive fountain pen signature, and Code 128 archive barcode.
+- 💵 **Faculty Paystub & Earnings Statement**: Standard semi-monthly certificated payroll advice with earnings, statutory taxes, CalSTRS teacher pension deductions, net pay summary, and direct deposit slip.
+- 🪪 **Educator / Student ID Card (Dual-Sided CR80)**: Front with school branding, employee/student photo, EMV smart chip, security hologram seal, and barcode; back with magnetic stripe, verification QR code, and cardholder signature strip.
+- 📜 **State Teaching Credential / Certificate**: Ornate guilloché border, gold foil seal with ribbons, and official board signatures.
+
+### 4. Advanced Realism & Camera Simulation
+- 📸 **Desk Camera Photo Mode**: Places the document on a dark wood office desk surface with realistic 3D perspective drop shadows and ambient room lighting highlights, mimicking a smartphone camera snapshot.
+- 🖨️ **Flatbed Scanner Simulation**: Adds an office multifunction printer scan timestamp header (`Canon imageRUNNER / HP LaserJet MFP`) and micro-tilt angle (-0.35°) replicating flatbed scanner glass placement.
+- ✍️ **Handwritten Signature Pad**: Draw your signature directly with mouse or touch on a smooth canvas pad, or upload a transparent signature PNG.
+
+### 5. Multi-System Educational Presets
+- 🇺🇸 **United States (Top K-12 Districts & Universities)**:
+  - **Fairfax County Public Schools (FCPS), VA** *(Top #1 district)*
+  - **Los Angeles Unified School District (LAUSD), CA** *(Top #2 national district)*
+  - **Clark County School District (CCSD - Las Vegas), NV**
+  - **Miami-Dade County Public Schools (M-DCPS), FL**
+  - **Houston Independent School District (HISD), TX**
+  - **Stride K12 (K12 Inc.)** *(Nationally accredited online school network)*
+  - **Connections Academy (Pearson Online K-12)**
+  - **Cecil B. DeMille My Viet Language Academy, CA** *(Westminster School District)*
+  - **Stanford Online High School (OHS)**
+  - **MIT Open Learning**
+- 🇻🇳 **Vietnam (Top Universities & Specialized High Schools)**:
+  - **Hanoi University of Science and Technology (HUST / ĐH Bách Khoa Hà Nội)**
+  - **VNU-HCM University of Technology (HCMUT / ĐH Bách Khoa TP.HCM)**
+  - **University of Economics Ho Chi Minh City (UEH)**
+  - **Hanoi - Amsterdam High School for the Gifted**
+  - **Le Hong Phong High School for the Gifted (TP.HCM)**
+- ✨ **Custom School Builder**: Enter any school or university name, domain, Federal EIN, and US NCES District ID with 1-click automatic synchronization.
+
+### 6. Export Options
+- 📸 **Download PNG (2K Resolution)**: High-DPI canvas capture.
+- 📄 **Export PDF (< 1MB)**: Highly optimized vector-quality A4 PDF with zero bloat.
+- 📦 **1-Click ZIP Package**: Automatically renders and bundles all 5 assets (Portal PNG, Portal PDF, Verification Letter PDF, ID Card PNG, and Paystub PDF) into a single clean ZIP archive.
+
+---
+
+## Quick Start
+
+### Option 1: Direct Run (Zero Installation)
+Double-click `start.bat` on Windows or open `index.html` directly in any web browser. Works 100% offline.
+
+### Option 2: Run via Node.js Local Server
 ```bash
 npm install
 npm start
 ```
-Truy cập: `http://localhost:3000`
+Open your browser and navigate to: `http://localhost:3000`
 
-## Bản Quyền
-Dự án được xây dựng phục vụ mục đích học tập, kiểm thử giao diện và mô phỏng hệ thống thông tin giáo dục.
+---
+
+## Technologies Used
+
+- **Frontend**: Vanilla JavaScript (ES6+), HTML5 Canvas, Modern CSS3
+- **Canvas Rendering**: `html2canvas` (offline bundled)
+- **PDF Generation**: `jsPDF` (offline bundled)
+- **Archive Packaging**: `JSZip` (offline bundled)
+- **Backend / Server**: Lightweight zero-dependency Node.js HTTP server (`server.js`)
+
+---
+
+## License & Disclaimer
+This project is developed for educational, UI testing, and educational information system simulation purposes.
