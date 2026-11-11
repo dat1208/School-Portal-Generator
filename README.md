@@ -79,5 +79,16 @@ Open your browser and navigate to: `http://localhost:3000`
 
 ---
 
-## License & Disclaimer
-This project is developed for educational, UI testing, and educational information system simulation purposes.
+## Legal Disclaimer / Miễn Trừ Trách Nhiệm
+
+### English
+1. **Educational & Research Purpose Only**: This software is designed, developed, and distributed solely for academic research, UI/UX prototyping, layout testing, educational technology simulation, and graphic design demonstrations.
+2. **No Affiliation**: This project is independent and is NOT affiliated with, authorized, maintained, sponsored, or endorsed by any educational institution, school district (including FCPS, LAUSD, CCSD, M-DCPS, HISD, Stride, Pearson, HUST, etc.), SheerID, OpenAI, Google, Microsoft, or any other trademark holder. All trademarks, service marks, trade names, school logos, and domain names are the intellectual property of their respective owners and are referenced strictly for descriptive and prototyping purposes.
+3. **Limitation of Liability & User Responsibility**: The developers, contributors, and repository maintainers assume no responsibility or legal liability for how users choose to utilize this software or any media generated with it. Users bear 100% full personal responsibility to ensure their use complies with all applicable local, national, and international laws, regulations, and third-party terms of service. **Any unauthorized submission, fraudulent activity, identity misrepresentation, or illicit use is strictly prohibited and explicitly disavowed.**
+
+---
+
+### Tiếng Việt (Miễn Trừ Trách Nhiệm Pháp Lý)
+1. **Mục Đích Giáo Dục & Nghiên Cứu**: Ứng dụng này được phát triển hoàn toàn vì mục đích học tập, nghiên cứu công nghệ giao diện web (UI/UX), kiểm thử hiển thị đồ họa và mô phỏng hệ thống thông tin giáo dục.
+2. **Không Liên Kết Tổ Chức**: Dự án hoàn toàn độc lập, KHÔNG trực thuộc, không được tài trợ hay đại diện cho bất kỳ học khu, trường học, cơ quan quản lý giáo dục nào (như FCPS, LAUSD, Stride, Đại học Bách Khoa...), cũng như không liên kết với SheerID hay bất kỳ tổ chức xác minh nào. Mọi tên gọi, thương hiệu và logo bản quyền đều thuộc về các chủ sở hữu tương ứng.
+3. **Trách Nhiệm Của Người Dùng**: Tác giả và những người đóng góp cho dự án KHÔNG chịu bất kỳ trách nhiệm pháp lý nào đối với hành vi sử dụng công cụ hoặc các hình ảnh/tài liệu được tạo ra. Người dùng chịu toàn bộ trách nhiệm cá nhân trong việc tuân thủ pháp luật và các điều khoản dịch vụ liên quan. **Tuyệt đối nghiêm cấm mọi hành vi gian lận danh tính, giả mạo tài liệu hoặc sử dụng trái phép vì các mục đích bất hợp pháp.**
